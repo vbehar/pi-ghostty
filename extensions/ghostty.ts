@@ -83,6 +83,12 @@ export default function (pi: ExtensionAPI) {
 		ctx.ui.setTitle(buildTitle());
 	});
 
+	pi.on("session_info_changed", async (event, ctx) => {
+		if (!ctx.hasUI) return;
+		sessionName = event.name;
+		if (!isWorking) ctx.ui.setTitle(buildTitle());
+	});
+
 	pi.on("model_select", async (event, ctx) => {
 		if (!ctx.hasUI) return;
 		currentModel = event.model.id;
